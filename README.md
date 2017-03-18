@@ -1,4 +1,4 @@
-# heritage-videoplayer
+# Heritage Announcement Videoplayer
 scripts and notes to support announcement video player setup on RaspberryPI at Heritage Baptist 
 
 _loose notes for now, I'll cleanup when I'm done._
@@ -21,3 +21,10 @@ going to use this as basic premise https://github.com/timatron/videolooper-raspb
 - then ran `update-rc.d announcements defaults`
 
 at this point, you should be able to restart the device and have it automatically start playing the video on boot
+
+# TODO
+
+- come up with maintenance plan
+- setup automated update cron
+- remote logging/status?
+- download videos from dropbox and restart service if new

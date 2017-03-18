@@ -13,3 +13,7 @@ updated & upgraded installed packages
 
 
 going to use modified scripts from here https://github.com/timatron/videolooper-raspbian
+
+ran `sudo apt-get -y install omxplayer`
+
+

@@ -1,0 +1,4 @@
+[general]
+app_key = replace-me
+app_secret = replace-me
+slack_url = https://hooks.slack.com/services/replace/me

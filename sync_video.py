@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os, datetime, subprocess, ConfigParser, sys, urllib2, socket, json
 import dropbox
 

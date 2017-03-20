@@ -28,6 +28,7 @@ except ConfigParser.NoOptionError:
     with open(CONFIG_FILE, 'wb') as configfile:
         cfg.write(configfile)
 
+
 def main():
     dbx = dropbox.Dropbox(OAUTH_TOKEN)
 
@@ -36,12 +37,14 @@ def main():
     lmod = datetime.datetime.utcfromtimestamp(os.path.getmtime(lfilename))
     dmod = dbx.files_get_metadata(dfilename).server_modified
 
-    if dmod > lmod:
-        dbx.files_download_to_file(lfilename, dfilename)
-        subprocess.call(["chown", "pi:pi", lfilename])
-        subprocess.call(["service", "announcements", "restart"])
-        return True
-    return False
+    if dmod <= lmod:
+        return False
+    
+    dbx.files_download_to_file(lfilename, dfilename)
+    subprocess.call(["chown", "pi:pi", lfilename])
+    subprocess.call(["service", "announcements", "restart"])
+    return True
+
 
 def send_notice(msg):
     req = urllib2.Request(SLACK_URL, headers={"Content-Type": "application/json"},

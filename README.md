@@ -34,11 +34,15 @@ saved `sync_videos.py` to pi home directory
 
 set the following crontab as root by running `sudo crontab -e`
 
-    */15 9,10,11 * * 0 /home/pi/sync_videos.py
-    */15 17,18 * * 0 /home/pi/sync_videos.py
-    */15 18 * * 3 /home/pi/sync_videos.py
+    */15 9,10,11 * * 0 /home/pi/sync_videos.py -n
+    */15 17,18 * * 0 /home/pi/sync_videos.py -n
+    */15 18 * * 3 /home/pi/sync_videos.py -n
 
 configured timezone by running `sudo dpkg-reconfigure tzdata`
+
+placed a copy of the config file in the pi home directory and named it `.dropbox-auth`
+
+ran the `sync_videos.py` script to set oauth token
 
 **didn't work, guessing the ARM thing threw it off, looking for other solution**
 

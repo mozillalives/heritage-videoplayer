@@ -30,8 +30,15 @@ _^ that didn't work right on ARM, going to try something else_
 
 ran `sudo apt-get install python-pip`
 ran `sudo pip install dropbox`
+saved `sync_videos.py` to pi home directory
 
+set the following crontab as root by running `sudo crontab -e`
 
+    */15 9,10,11 * * 0 /home/pi/sync_videos.py
+    */15 17,18 * * 0 /home/pi/sync_videos.py
+    */15 18 * * 3 /home/pi/sync_videos.py
+
+configured timezone by running `sudo dpkg-reconfigure tzdata`
 
 **didn't work, guessing the ARM thing threw it off, looking for other solution**
 

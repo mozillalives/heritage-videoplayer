@@ -23,11 +23,6 @@ adapting a service [from this gist](https://gist.github.com/naholyr/4275302)
 
 at this point, you should be able to restart the device and have it automatically start playing the video on boot
 
-followed [these instructions](https://www.dropbox.com/install-linux) to install dropbox
-
-ran `cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -`
-_^ that didn't work right on ARM, going to try something else_
-
 ran `sudo apt-get install python-pip`
 ran `sudo pip install dropbox`
 saved `sync_videos.py` to pi home directory
@@ -44,12 +39,9 @@ placed a copy of the config file in the pi home directory and named it `.dropbox
 
 ran the `sync_videos.py` script to set oauth token
 
-**didn't work, guessing the ARM thing threw it off, looking for other solution**
-
 # TODO
 
 - come up with maintenance plan
 - setup automated update cron
 - remote logging/status?
-- download videos from dropbox and restart service if new
 - have service shut down during non-normal hours (or just make it detect when hdmi is connected)

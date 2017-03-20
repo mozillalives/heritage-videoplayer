@@ -26,6 +26,12 @@ at this point, you should be able to restart the device and have it automaticall
 followed [these instructions](https://www.dropbox.com/install-linux) to install dropbox
 
 ran `cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -`
+_^ that didn't work right on ARM, going to try something else_
+
+ran `sudo apt-get install python-pip`
+ran `sudo pip install dropbox`
+
+
 
 **didn't work, guessing the ARM thing threw it off, looking for other solution**
 

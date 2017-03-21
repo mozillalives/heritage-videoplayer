@@ -2,7 +2,7 @@
 import os, datetime, subprocess, ConfigParser, sys, urllib2, socket, json
 import dropbox
 
-CONFIG_FILE = os.path.join(os.path.expanduser('~'), '.dropbox-oauth')
+CONFIG_FILE = '/home/pi/.dropbox-oauth'
 
 cfg = ConfigParser.ConfigParser()
 cfg.read(CONFIG_FILE)

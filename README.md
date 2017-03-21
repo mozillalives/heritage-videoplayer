@@ -39,6 +39,9 @@ placed a copy of the config file in the pi home directory and named it `.dropbox
 
 ran the `sync_videos.py` script to set oauth token
 
+# Dropbox
+I created an app, enabled more users, created a special user account for dropbox, shared with new user, used oauth token from new user on PIs.
+
 # TODO
 
 - come up with maintenance plan

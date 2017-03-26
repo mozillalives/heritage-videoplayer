@@ -2,7 +2,8 @@
 import os, datetime, subprocess, ConfigParser, sys, urllib2, socket, json
 import dropbox
 
-CONFIG_FILE = '/home/pi/.dropbox-oauth'
+CONFIG_FILE = '/home/pi/video-player-settings.cfg'
+OAUTH_FILE = '/home/pi/.dropbox_oauth_token'
 
 cfg = ConfigParser.ConfigParser()
 cfg.read(CONFIG_FILE)
@@ -10,8 +11,9 @@ APP_KEY = cfg.get('general', 'app_key')
 APP_SECRET = cfg.get('general', 'app_secret')
 SLACK_URL = cfg.get('general', 'slack_url')
 try:
-    OAUTH_TOKEN = cfg.get('general', 'oauth_token')
-except ConfigParser.NoOptionError:
+    with open(OAUTH_FILE, 'r') as token_file:
+        OAUTH_TOKEN = token_file.read()
+except IOError:
     if '-n' in sys.argv:
         raise SystemError("No OAuth token, exiting")
 
@@ -25,13 +27,14 @@ except ConfigParser.NoOptionError:
 
     oauth_result = auth_flow.finish(auth_code)
     OAUTH_TOKEN = oauth_result.access_token
-    cfg.set('general', 'oauth_token', OAUTH_TOKEN)
-    with open(CONFIG_FILE, 'wb') as configfile:
-        cfg.write(configfile)
+    with open(OAUTH_FILE, 'w') as configfile:
+        configfile.write(OAUTH_TOKEN)
 
 
 def main():
     dbx = dropbox.Dropbox(OAUTH_TOKEN)
+    with open(OAUTH_FILE, 'w') as configfile:
+        configfile.write(dbx._oauth2_access_token)
 
     lfilename = "/home/pi/videos/weekly-announcements.mp4"
     dfilename = "/announcements/weekly-announcements.mp4"
@@ -40,7 +43,7 @@ def main():
 
     if dmod <= lmod:
         return False
-    
+
     dbx.files_download_to_file(lfilename, dfilename)
     subprocess.call(["chown", "pi:pi", lfilename])
     subprocess.call(["service", "announcements", "restart"])

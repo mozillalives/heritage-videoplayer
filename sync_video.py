@@ -38,11 +38,13 @@ def main():
 
     lfilename = "/home/pi/videos/weekly-announcements.mp4"
     dfilename = "/announcements/weekly-announcements.mp4"
-    lmod = datetime.datetime.utcfromtimestamp(os.path.getmtime(lfilename))
     dmod = dbx.files_get_metadata(dfilename).server_modified
-
-    if dmod <= lmod:
-        return False
+    try:
+        lmod = datetime.datetime.utcfromtimestamp(os.path.getmtime(lfilename))
+        if dmod <= lmod:
+            return False
+    except OSError:
+        pass
 
     dbx.files_download_to_file(lfilename, dfilename)
     subprocess.call(["chown", "pi:pi", lfilename])

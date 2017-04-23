@@ -29,9 +29,9 @@ saved `sync_videos.py` to pi home directory
 
 set the following crontab as root by running `sudo crontab -e`
 
-    */15 9,10,11 * * 0 /home/pi/sync_videos.py -n
-    */15 17,18 * * 0 /home/pi/sync_videos.py -n
-    */15 18 * * 3 /home/pi/sync_videos.py -n
+    */15 9,10,11 * * 0 /home/pi/sync_video.py -n 2>&1 | /usr/bin/logger -t sync_video
+    */15 17,18 * * 0 /home/pi/sync_video.py -n 2>&1 | /usr/bin/logger -t sync_video
+    */15 18 * * 3 /home/pi/sync_video.py -n 2>&1 | /usr/bin/logger -t sync_video
 
 configured timezone by running `sudo dpkg-reconfigure tzdata`
 

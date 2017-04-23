@@ -32,6 +32,7 @@ except IOError:
 
 
 def main():
+    send_notice("{} checking for new file".format(socket.gethostname()))
     dbx = dropbox.Dropbox(OAUTH_TOKEN)
     with open(OAUTH_FILE, 'w') as configfile:
         configfile.write(dbx._oauth2_access_token)

@@ -45,6 +45,6 @@ I created an app, enabled more users, created a special user account for dropbox
 # TODO
 
 - come up with maintenance plan
+- make sure nothing is insecure in the default setup of raspbian
 - setup automated update cron
 - remote logging/status?
-- have service shut down during non-normal hours (or just make it detect when hdmi is connected)

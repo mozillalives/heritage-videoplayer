@@ -48,4 +48,3 @@ I created an app, enabled more users, created a special user account for dropbox
 - make sure nothing is insecure in the default setup of raspbian
 - setup automated update cron
 - remote logging/status?
-- download new file to temp file, then move into place when done

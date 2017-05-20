@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-import os, datetime, subprocess, ConfigParser, sys, urllib2, socket, json
-import dropbox
+import os, datetime, subprocess, ConfigParser, sys, urllib2, socket, json, tempfile
+import dropbox, hasher
 
 CONFIG_FILE = '/home/pi/video-player-settings.cfg'
 OAUTH_FILE = '/home/pi/.dropbox_oauth_token'
@@ -39,7 +39,9 @@ def main():
 
     lfilename = "/home/pi/videos/weekly-announcements.mp4"
     dfilename = "/announcements/weekly-announcements.mp4"
+    tfile = tempfile.NamedTemporaryFile()
     dmod = dbx.files_get_metadata(dfilename).server_modified
+    chash = dbx.files_get_metadata(dfilename).content_hash
     try:
         lmod = datetime.datetime.utcfromtimestamp(os.path.getmtime(lfilename))
         if dmod <= lmod:
@@ -47,7 +49,12 @@ def main():
     except OSError:
         pass
 
-    dbx.files_download_to_file(lfilename, dfilename)
+    dbx.files_download_to_file(tfile.name, dfilename)
+    thash = compute_hash(tfile.name)
+    if thash != chash:
+        raise RuntimeError("failed to download new file, hashes didn't match")
+
+    subprocess.call(["cp", tfile.name, lfilename])
     subprocess.call(["chown", "pi:pi", lfilename])
     subprocess.call(["service", "announcements", "restart"])
     return True
@@ -57,6 +64,17 @@ def send_notice(msg):
     req = urllib2.Request(SLACK_URL, headers={"Content-Type": "application/json"},
                           data=json.dumps({'text' : msg}))
     urllib2.urlopen(req)
+
+
+def compute_hash(filename):
+    h = hasher.DropboxContentHasher()
+    with open(filename, 'rb') as f:
+        while True:
+            chunk = f.read(1024)
+            if len(chunk) == 0:
+                break
+            h.update(chunk)
+    return h.hexdigest()
 
 
 if __name__ == '__main__':

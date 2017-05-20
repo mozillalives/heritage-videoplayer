@@ -1,0 +1,4 @@
+*pyc
+.env
+.dropbox_oauth_token
+video-player-settings.cfg

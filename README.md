@@ -36,7 +36,7 @@ set the following crontab as root by running `sudo crontab -e`
 
 configured timezone by running `sudo dpkg-reconfigure tzdata`
 
-ran the `sync_videos.py` script to set oauth token
+ran `python sync_videos.py` script to set oauth token
 
 # Dropbox
 I created an app, enabled more users, created a special user account for dropbox, shared with new user, used oauth token from new user on PIs.

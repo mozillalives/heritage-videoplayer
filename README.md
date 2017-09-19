@@ -36,8 +36,6 @@ set the following crontab as root by running `sudo crontab -e`
 
 configured timezone by running `sudo dpkg-reconfigure tzdata`
 
-placed a copy of the config file in the pi home directory and named it `.dropbox-auth`
-
 ran the `sync_videos.py` script to set oauth token
 
 # Dropbox

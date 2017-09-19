@@ -18,23 +18,21 @@ adapting a service [from this gist](https://gist.github.com/naholyr/4275302)
 - downloaded `announcements.sh`, `hasher.py`, `sync_video.py` and `sample-settings.cfg` to `/home/pi`
 - renamed `sample-settings.cfg` to `video-player-settings.cfg` and added actual settings
 - ran `sudo apt-get -y install omxplayer`
-- moved announcements.sh to `/etc/init.d/announcements`
-- made sure it was executable
-- ran `touch /var/log/announcements.log`
-- then ran `chown pi:pi /var/log/announcements.log`
-- then ran `update-rc.d announcements defaults`
+- moved announcements.sh by running `sudo mv announcements.sh /etc/init.d/announcements`
+- made sure it was executable by running `sudo chmod a+x /etc/init.d/announcements`
+- ran `sudo touch /var/log/announcements.log`
+- then ran `sudo chown pi:pi /var/log/announcements.log`
+- then ran `sudo update-rc.d announcements defaults`
 
 at this point, you should be able to restart the device and have it automatically start playing the video on boot
+(provided you have the video in `/home/pi/videos/weekly-announcements.mp4`)
 
-ran `sudo apt-get install python-pip`
+ran `sudo apt-get install python-pip -y`
 ran `sudo pip install dropbox`
-saved `sync_videos.py` to pi home directory
 
 set the following crontab as root by running `sudo crontab -e`
 
-    */15 9,10,11 * * 0 /home/pi/sync_video.py -n 2>&1 | /usr/bin/logger -t sync_video
-    */15 17,18 * * 0 /home/pi/sync_video.py -n 2>&1 | /usr/bin/logger -t sync_video
-    */15 18 * * 3 /home/pi/sync_video.py -n 2>&1 | /usr/bin/logger -t sync_video
+    */15 * * * 0 /home/pi/sync_video.py -n 2>&1 | /usr/bin/logger -t sync_video
 
 configured timezone by running `sudo dpkg-reconfigure tzdata`
 

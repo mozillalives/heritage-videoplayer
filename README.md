@@ -6,6 +6,7 @@ _loose notes for now, I'll cleanup when I'm done._
 - Using PI Zero W, 16GB micro SD, USB and HDMI cords from AmazonBasics
 - installed latest Raspbian lite
 - setup ssh via usb (for initial config) via these instructions https://www.thepolyglotdeveloper.com/2016/06/connect-raspberry-pi-zero-usb-cable-ssh/
+- changed the password of the `pi` user by running `passwd`
 - changed hostname via these instructions https://www.dexterindustries.com/howto/change-the-hostname-of-your-pi/
 - setup wifi via these instructions https://learn.adafruit.com/adafruits-raspberry-pi-lesson-3-network-setup/setting-up-wifi-with-occidentalis
 - ran `sudo dpkg-reconfigure locales` then `sudo update-locale LANG="en_US.UTF-8" LANGUAGE="en_US:en" LC_ALL="en_US.UTF-8"` to fix locale settings

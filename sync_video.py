@@ -54,9 +54,14 @@ def main():
     if thash != chash:
         raise RuntimeError("failed to download new file, hashes didn't match")
 
+    if not os.path.exists("/home/pi/videos"):
+        subprocess.call(["mkdir", "/home/pi/videos"])
+    if not os.path.exists(lfilename):
+        subprocess.call(["touch", lfilename])
+
     subprocess.call(["cp", tfile.name, lfilename])
     subprocess.call(["chown", "pi:pi", lfilename])
-    subprocess.call(["service", "announcements", "restart"])
+    subprocess.call(["sudo", "service", "announcements", "restart"])
     return True
 
 

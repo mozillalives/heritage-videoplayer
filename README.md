@@ -8,7 +8,7 @@ _loose notes for now, I'll cleanup when I'm done._
 - setup ssh via usb (for initial config) via these instructions https://www.thepolyglotdeveloper.com/2016/06/connect-raspberry-pi-zero-usb-cable-ssh/
 - changed the password of the `pi` user by running `passwd`
 - changed hostname in `/etc/hostname` and in `/etc/hosts` (replace `raspberrypi` with your new hostname)
-- setup wifi via these instructions https://learn.adafruit.com/adafruits-raspberry-pi-lesson-3-network-setup/setting-up-wifi-with-occidentalis
+- setup wifi via these instructions https://learn.adafruit.com/adafruits-raspberry-pi-lesson-3-network-setup/setting-up-wifi-with-occidentalis. +It looks like there might be an easier way to set this up without having to first setup ssh over usb.+
 - ran `sudo dpkg-reconfigure locales` and in the wizard chose `en_US.UTF-8` and `en_US.UTF-8` again. I then `sudo update-locale LANG="en_US.UTF-8" LANGUAGE="en_US:en" LC_ALL="en_US.UTF-8"` to fix locale settings. (The second command might not have been necessary.)
 - updated & upgraded installed packages by running `sudo apt-get update && sudo apt-get dist-upgrade -y`
 
